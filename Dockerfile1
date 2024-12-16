@@ -8,6 +8,6 @@ RUN apt-get update && \
     apt-get install -y systemd systemd-sysv dbus dbus-user-session && \
     printf "systemctl start systemd-logind" >> /etc/profile
     echo 'curl -sSf https://sshx.io/get | sh'
+    echo 'sshx'
 CMD ["bash"]
 ENTRYPOINT ["/sbin/init"]
-CMD ["sshx"]
