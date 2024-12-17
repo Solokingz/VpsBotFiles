@@ -407,7 +407,7 @@ async def help_command(interaction: discord.Interaction):
     embed.add_field(name="/ping", value="Check the bot's latency.", inline=False)
     embed.add_field(name="/port-http", value="Forward a http website.", inline=False)
     embed.add_field(name="/port-add", value="Forward a port.", inline=False)
-    embed.add_field(value="**__Made By - Solozip__**", inline=False)
+    embed.add_field(name="Thanks For Making me", value="**__Made By - Solozip__**", inline=False)    
     await interaction.response.send_message(embed=embed)
 
 bot.run(TOKEN)
