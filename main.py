@@ -172,7 +172,7 @@ async def restart_server(interaction: discord.Interaction, container_name: str):
                                                         stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
         ssh_session_line = await capture_ssh_session_line(exec_cmd)
         if ssh_session_line:
-            await interaction.user.send(embed=discord.Embed(description=f"### Instance Restarted\nSSH Session Command: ```{ssh_session_line}```\nOS: Ubuntu 22.04", color=0x00ff00))
+            await interaction.user.send(embed=discord.Embed(description=f"### Instance Restarted\nSSH Session Command: ```{ssh_session_line}```\nOS: Ubuntu 22.04. Made By - Solozip", color=0x00ff00))
             await interaction.response.send_message(embed=discord.Embed(description="Instance restarted successfully. Check your DMs for details. Made By - Solozip", color=0x00ff00))
         else:
             await interaction.response.send_message(embed=discord.Embed(description="Instance restarted, but failed to get SSH session line. Made By - Solozip", color=0xff0000))
@@ -278,7 +278,7 @@ async def create_server_task(interaction):
 
     ssh_session_line = await capture_ssh_session_line(exec_cmd)
     if ssh_session_line:
-        await interaction.user.send(embed=discord.Embed(description=f"### Successfully created Instance\nSSH Session Command: ```{ssh_session_line}```\nOS: Ubuntu 22.04", color=0x00ff00))
+        await interaction.user.send(embed=discord.Embed(description=f"### Successfully created Instance\nSSH Session Command: ```{ssh_session_line}```\nOS: Ubuntu 22.04.  Made By - Solozip", color=0x00ff00))
         add_to_database(user, container_id, ssh_session_line)
         await interaction.followup.send(embed=discord.Embed(description="Instance created successfully. Check your DMs for details.", color=0x00ff00))
     else:
@@ -322,7 +322,7 @@ async def create_server_task_debian(interaction):
         subprocess.run(["docker", "kill", container_id])
         subprocess.run(["docker", "rm", container_id])
 
-@bot.tree.command(name="deploy-ubuntu", description="Creates a new Instance with Ubuntu 22.04")
+@bot.tree.command(name="deploy-ubuntu", description="Creates a new Instance with Ubuntu 22.04. Made By - Solozip")
 async def deploy_ubuntu(interaction: discord.Interaction):
     await create_server_task(interaction)
 
@@ -396,7 +396,7 @@ async def remove_server(interaction: discord.Interaction, container_name: str):
 @bot.tree.command(name="help", description="Shows the help message")
 async def help_command(interaction: discord.Interaction):
     embed = discord.Embed(title="Help", color=0x00ff00)
-    embed.add_field(name="/deploy-ubuntu", value="Creates a new Instance with Ubuntu 22.04.", inline=False)
+    embed.add_field(name="/deploy-ubuntu", value="Creates a new Instance with Ubuntu 22.04. Made By - Solozip", inline=False)
     embed.add_field(name="/deploy-debian", value="Creates a new Instance with Debian 12.", inline=False)
     embed.add_field(name="/remove <ssh_command/Name>", value="Removes a server", inline=False)
     embed.add_field(name="/start <ssh_command/Name>", value="Start a server.", inline=False)
