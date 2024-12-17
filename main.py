@@ -106,7 +106,7 @@ async def regen_ssh_command(interaction: discord.Interaction, container_name: st
     container_id = get_container_id_from_database(user, container_name)
 
     if not container_id:
-        await interaction.response.send_message(embed=discord.Embed(description="No active instance found for your user.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="No active instance found for your user. Made By - Solozip", color=0xff0000))
         return
 
     try:
@@ -119,16 +119,16 @@ async def regen_ssh_command(interaction: discord.Interaction, container_name: st
     ssh_session_line = await capture_ssh_session_line(exec_cmd)
     if ssh_session_line:
         await interaction.user.send(embed=discord.Embed(description=f"### New SSH Session Command: ```{ssh_session_line}```", color=0x00ff00))
-        await interaction.response.send_message(embed=discord.Embed(description="New SSH session generated. Check your DMs for details.", color=0x00ff00))
+        await interaction.response.send_message(embed=discord.Embed(description="New SSH session generated. Check your DMs for details. Made By - Solozip", color=0x00ff00))
     else:
-        await interaction.response.send_message(embed=discord.Embed(description="Failed to generate new SSH session.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="Failed to generate new SSH session. Made By - Solozip", color=0xff0000))
 
 async def start_server(interaction: discord.Interaction, container_name: str):
     user = str(interaction.user)
     container_id = get_container_id_from_database(user, container_name)
 
     if not container_id:
-        await interaction.response.send_message(embed=discord.Embed(description="No instance found for your user.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="No instance found for your user. Made By - Solozip", color=0xff0000))
         return
 
     try:
@@ -138,9 +138,9 @@ async def start_server(interaction: discord.Interaction, container_name: str):
         ssh_session_line = await capture_ssh_session_line(exec_cmd)
         if ssh_session_line:
             await interaction.user.send(embed=discord.Embed(description=f"### Instance Started\nSSH Session Command: ```{ssh_session_line}```", color=0x00ff00))
-            await interaction.response.send_message(embed=discord.Embed(description="Instance started successfully. Check your DMs for details.", color=0x00ff00))
+            await interaction.response.send_message(embed=discord.Embed(description="Instance started successfully. Check your DMs for details. Made By - Solozip", color=0x00ff00))
         else:
-            await interaction.response.send_message(embed=discord.Embed(description="Instance started, but failed to get SSH session line.", color=0xff0000))
+            await interaction.response.send_message(embed=discord.Embed(description="Instance started, but failed to get SSH session line. Made By - Solozip", color=0xff0000))
     except subprocess.CalledProcessError as e:
         await interaction.response.send_message(embed=discord.Embed(description=f"Error starting instance: {e}", color=0xff0000))
 
@@ -154,16 +154,16 @@ async def stop_server(interaction: discord.Interaction, container_name: str):
 
     try:
         subprocess.run(["docker", "stop", container_id], check=True)
-        await interaction.response.send_message(embed=discord.Embed(description="Instance stopped successfully.", color=0x00ff00))
+        await interaction.response.send_message(embed=discord.Embed(description="Instance stopped successfully. Made By - Solozip", color=0x00ff00))
     except subprocess.CalledProcessError as e:
-        await interaction.response.send_message(embed=discord.Embed(description=f"Error stopping instance: {e}", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description=f"Error stopping instance: {e} Made By - Solozip", color=0xff0000))
 
 async def restart_server(interaction: discord.Interaction, container_name: str):
     user = str(interaction.user)
     container_id = get_container_id_from_database(user, container_name)
 
     if not container_id:
-        await interaction.response.send_message(embed=discord.Embed(description="No instance found for your user.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="No instance found for your user. Made By - Solozip", color=0xff0000))
         return
 
     try:
@@ -173,11 +173,11 @@ async def restart_server(interaction: discord.Interaction, container_name: str):
         ssh_session_line = await capture_ssh_session_line(exec_cmd)
         if ssh_session_line:
             await interaction.user.send(embed=discord.Embed(description=f"### Instance Restarted\nSSH Session Command: ```{ssh_session_line}```\nOS: Ubuntu 22.04", color=0x00ff00))
-            await interaction.response.send_message(embed=discord.Embed(description="Instance restarted successfully. Check your DMs for details.", color=0x00ff00))
+            await interaction.response.send_message(embed=discord.Embed(description="Instance restarted successfully. Check your DMs for details. Made By - Solozip", color=0x00ff00))
         else:
-            await interaction.response.send_message(embed=discord.Embed(description="Instance restarted, but failed to get SSH session line.", color=0xff0000))
+            await interaction.response.send_message(embed=discord.Embed(description="Instance restarted, but failed to get SSH session line. Made By - Solozip", color=0xff0000))
     except subprocess.CalledProcessError as e:
-        await interaction.response.send_message(embed=discord.Embed(description=f"Error restarting instance: {e}", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description=f"Error restarting instance: {e} Made By - Solozip", color=0xff0000))
 
 def get_container_id_from_database(user, container_name):
     if not os.path.exists(database_file):
@@ -212,7 +212,7 @@ async def capture_output(process, keyword):
 @bot.tree.command(name="port-add", description="Adds a port forwarding rule")
 @app_commands.describe(container_name="The name of the container", container_port="The port in the container")
 async def port_add(interaction: discord.Interaction, container_name: str, container_port: int):
-    await interaction.response.send_message(embed=discord.Embed(description="Setting up port forwarding. This might take a moment...", color=0x00ff00))
+    await interaction.response.send_message(embed=discord.Embed(description="Setting up port forwarding. This might take a moment... Made By - Solozip", color=0x00ff00))
 
     public_port = generate_random_port()
 
@@ -368,10 +368,10 @@ async def list_servers(interaction: discord.Interaction):
         embed = discord.Embed(title="Your Instances", color=0x00ff00)
         for server in servers:
             _, container_name, _ = server.split('|')
-            embed.add_field(name=container_name, value="Description: 32 gb ram & 6 cores.", inline=False)
+            embed.add_field(name=container_name, value="Description: 32 gb ram & 6 cores. Made By - Solozip", inline=False)
         await interaction.response.send_message(embed=embed)
     else:
-        await interaction.response.send_message(embed=discord.Embed(description="You have no servers.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="You have no servers. Made By - Solozip", color=0xff0000))
 
 @bot.tree.command(name="remove", description="Removes an Instance")
 @app_commands.describe(container_name="The name/ssh-command of your Instance")
@@ -380,7 +380,7 @@ async def remove_server(interaction: discord.Interaction, container_name: str):
     container_id = get_container_id_from_database(user, container_name)
 
     if not container_id:
-        await interaction.response.send_message(embed=discord.Embed(description="No Instance found for your user with that name.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="No Instance found for your user with that name. Made By - Solozip", color=0xff0000))
         return
 
     try:
@@ -389,9 +389,9 @@ async def remove_server(interaction: discord.Interaction, container_name: str):
         
         remove_from_database(container_id)
         
-        await interaction.response.send_message(embed=discord.Embed(description=f"Instance '{container_name}' removed successfully.", color=0x00ff00))
+        await interaction.response.send_message(embed=discord.Embed(description=f"Instance '{container_name}' removed successfully. Made By - Solozip", color=0x00ff00))
     except subprocess.CalledProcessError as e:
-        await interaction.response.send_message(embed=discord.Embed(description=f"Error removing instance: {e}", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description=f"Error removing instance: {e} Made By - Solozip", color=0xff0000))
 
 @bot.tree.command(name="help", description="Shows the help message")
 async def help_command(interaction: discord.Interaction):
