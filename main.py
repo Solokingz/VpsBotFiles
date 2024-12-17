@@ -149,7 +149,7 @@ async def stop_server(interaction: discord.Interaction, container_name: str):
     container_id = get_container_id_from_database(user, container_name)
 
     if not container_id:
-        await interaction.response.send_message(embed=discord.Embed(description="No instance found for your user.", color=0xff0000))
+        await interaction.response.send_message(embed=discord.Embed(description="No instance found for your user. Made By - Solozip", color=0xff0000))
         return
 
     try:
@@ -280,14 +280,14 @@ async def create_server_task(interaction):
     if ssh_session_line:
         await interaction.user.send(embed=discord.Embed(description=f"### Successfully created Instance\nSSH Session Command: ```{ssh_session_line}```\nOS: Ubuntu 22.04.  Made By - Solozip", color=0x00ff00))
         add_to_database(user, container_id, ssh_session_line)
-        await interaction.followup.send(embed=discord.Embed(description="Instance created successfully. Check your DMs for details.", color=0x00ff00))
+        await interaction.followup.send(embed=discord.Embed(description="Instance created successfully. Check your DMs for details. Made By - Solozip", color=0x00ff00))
     else:
         await interaction.followup.send(embed=discord.Embed(description="Something went wrong or the Instance is taking longer than expected. If this problem continues, Contact Support.", color=0xff0000))
         subprocess.run(["docker", "kill", container_id])
         subprocess.run(["docker", "rm", container_id])
 
 async def create_server_task_debian(interaction):
-    await interaction.response.send_message(embed=discord.Embed(description="Creating Instance, This takes a few seconds.", color=0x00ff00))
+    await interaction.response.send_message(embed=discord.Embed(description="Creating Instance, This takes a few seconds. Made By - Solozip", color=0x00ff00))
     user = str(interaction.user)
     if count_user_servers(user) >= SERVER_LIMIT:
         await interaction.followup.send(embed=discord.Embed(description="```Error: Instance Limit-reached```", color=0xff0000))
