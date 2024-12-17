@@ -396,7 +396,7 @@ async def remove_server(interaction: discord.Interaction, container_name: str):
 @bot.tree.command(name="help", description="Shows the help message")
 async def help_command(interaction: discord.Interaction):
     embed = discord.Embed(title="Help", color=0x00ff00)
-    embed.add_field(name="/deploy-ubuntu", value="Creates a new Instance with Ubuntu 22.04. Made By - Solozip", inline=False)
+    embed.add_field(name="/deploy-ubuntu", value="Creates a new Instance with Ubuntu 22.04.", inline=False)
     embed.add_field(name="/deploy-debian", value="Creates a new Instance with Debian 12.", inline=False)
     embed.add_field(name="/remove <ssh_command/Name>", value="Removes a server", inline=False)
     embed.add_field(name="/start <ssh_command/Name>", value="Start a server.", inline=False)
@@ -407,7 +407,6 @@ async def help_command(interaction: discord.Interaction):
     embed.add_field(name="/ping", value="Check the bot's latency.", inline=False)
     embed.add_field(name="/port-http", value="Forward a http website.", inline=False)
     embed.add_field(name="/port-add", value="Forward a port.", inline=False)
-    embed.add_field(name="Thanks For Making me", value="**__Made By - Solozip__**", inline=False)    
     await interaction.response.send_message(embed=embed)
 
 bot.run(TOKEN)
